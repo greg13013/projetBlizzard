@@ -1,0 +1,25 @@
+export class Personnage {
+
+  constructor(public id: number,
+              public name?: string,
+              public gender?: string,
+              public lvl?: number,
+              public classe?: string,
+              public race?: string,
+              public realm?: string,
+              public realmID?: string,
+              public faction?: string,
+              public money?: string,
+              public goldGained?: string,
+              public goldLost?: string,
+              public zone?: string,
+              public region?: string,
+              public pdf?: string,
+              public nbreMort?: string,
+              public lienImage?: string,
+              public ilvl?: string,
+              public specialisation?: string,
+              public hf?: string,
+              public renom?: string,
+              public covenant?: string) {  }
+}

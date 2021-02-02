@@ -1,0 +1,13 @@
+<div class="container">
+
+  <div class="row pb-5">
+    <div class="col-4" *ngFor="let item of montureService.montureObject; let index = index">
+      <h4> {{ item.nomMonture }} </h4><!-- || objet : {{montureService.montureObject[index].nomMonture}} -->
+      <img class="img-fluid" style="width: 50%" [src] = item.lienImage>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="montureService.tokenAcquisMonture == false">
+  <h2>Token manquant</h2>
+</div>

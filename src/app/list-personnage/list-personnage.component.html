@@ -1,0 +1,97 @@
+
+<div class="mr-5 ml-5 mt-3" *ngIf="personnageService.tokenAcquisPersonnage == true">
+  <!--
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Personnage</th>
+      <th scope="col">Sexe</th>
+      <th scope="col">Lvl</th>
+      <th scope="col">Classe</th>
+      <th scope="col">Race</th>
+      <th scope="col">Serveur</th>
+      <th scope="col">Faction</th>
+      <th scope="col">#</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of personnageService.personnagesObject; let index = index" [ngStyle]="{color:getFaction(item.faction)}" >
+              <th scope="row"> {{ index }}</th>
+              <td>{{item.name}}</td>
+              <td>{{item.gender}}</td>
+              <td>{{item.lvl}}</td>
+              <td>{{item.classe}}</td>
+              <td>{{item.race}}</td>
+              <td>{{item.realm}}</td>
+              <td>{{item.faction}}</td>
+              <td><a [routerLink]="[index]">Détails</a></td>
+      </tr>
+    </tbody>
+  </table>
+-->
+
+<div class="row h3 bg-secondary rounded text-white text-center pb-2">
+  <div class="col-1">
+    #
+  </div>
+  <div class="col-2">
+    Personnage
+  </div>
+  <div class="col-1">
+    Sexe
+  </div>
+  <div class="col-1">
+    Lvl
+  </div>
+  <div class="col-2">
+    Classe
+  </div>
+  <div class="col-2">
+    Race
+  </div>
+  <div class="col-1">
+    Serveur
+  </div>
+  <div class="col-1">
+    Faction
+  </div>
+  <div class="col-1">
+    #
+  </div>
+</div>
+
+<div class="row h6 pb-2 text-center" *ngFor="let item of personnageService.personnagesObject; let index = index" [ngStyle]="{color:getFaction(item.faction)}">
+  <div class="col-1">
+    {{ index }}
+  </div>
+  <div class="col-2">
+    {{item.name}}
+  </div>
+  <div class="col-1">
+    {{item.gender}}
+  </div>
+  <div class="col-1">
+    {{item.lvl}}
+  </div>
+  <div class="col-2">
+    {{item.classe}}
+  </div>
+  <div class="col-2">
+    {{item.race}}
+  </div>
+  <div class="col-1">
+    {{item.realm}}
+  </div>
+  <div class="col-1">
+    {{item.faction}}
+  </div>
+  <div class="col-1">
+    <a [routerLink]="[index]" placement="top" ngbTooltip="{{item.name}}" >Détails</a>
+  </div>
+</div>
+</div>
+
+<div class="row" *ngIf="personnageService.tokenAcquisPersonnage == false">
+  <h2>Token manquant</h2>
+</div>

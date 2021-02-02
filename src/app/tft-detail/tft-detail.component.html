@@ -1,0 +1,22 @@
+<div class="row"></div>
+
+<div class="container" *ngIf="tftService.fin">
+  <h2>{{tftService.tft.date | date: 'yyyy-MM-dd h:mm:ss a'}}</h2>
+  <div class="row" *ngFor="let item of tftService.tft.participant; let index = index">
+     PUUID : {{item.puuid}} <br>
+    NOM : {{item.nom}} <br>
+    PLACEMENT : {{item.placement}}<br>
+    TEMP : {{item.tempEliminer.substring(0,item.tempEliminer.indexOf("."))}}<br> <!-- j'enleve tout ce qu'il y a apres le point dans le temp -->
+    DERNIER ROUND : {{item.round}}<br>
+    OR RESTANT : {{item.gold}}<br>
+    KILL : {{item.kill}}<br>
+    <div class="col-6" *ngFor="let trait of item.trait; let index = index">
+      {{trait.name}} : {{trait.num_units}}<br>
+    </div>
+    <div class="col-6 offset-3" *ngFor="let unit of item.units; let index = index" [ngStyle]="{color: getRareter(unit.rarity)}">
+      {{unit.character_id}} ({{getRareter(unit.rarity)}}, TIERS {{unit.tier}}) {{unit.chosen}}<br>
+    </div>
+
+    <br><br>
+  </div>
+</div>

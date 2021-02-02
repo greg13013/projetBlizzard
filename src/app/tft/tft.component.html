@@ -1,0 +1,24 @@
+<p>tft works!</p>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <label for="nom">Nom Invocateur</label>
+  <input type="text" id="nom" class="form-control" name="nom" ngModel>
+  <button class="btn btn-primary" type="submit">Envoyer</button>
+</form>
+
+<div class="container" *ngIf="tftService.tft">
+  <h2>15 DERNIERS MATCH</h2>
+  {{tftService.tft.puuid}}
+  <div class="row" *ngFor="let item of tftService.tft.match; let index = index">
+
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+      <ngb-panel title="{{item.idMatch}}">
+        <ng-template ngbPanelContent>
+          <body>
+          <app-tft-detail [idMatch] = item.idMatch></app-tft-detail> <!-- envoie en input au component tft-detail -->
+          </body>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+    Match : <a [routerLink]="[item.idMatch]">{{index + 1 }} - {{item.date | date: 'yyyy-MM-dd h:mm:ss a'}}</a> <br>
+  </div>
+</div>
