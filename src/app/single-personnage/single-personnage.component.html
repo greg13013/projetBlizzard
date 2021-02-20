@@ -1,50 +1,96 @@
 <div class="row align-items-center">
-<div class="col-3">
+<div class="col-12 col-lg-5">
   <img class="img-fluid" [src] = personnageService.personnagesObject[index].lienImage>
 </div>
-<div class="col-9">
-    <table class="table">
-      <thead>
-      <tr class="bg-secondary text-white text-center rounded">
-        <th scope="col">Personnage</th>
-        <th scope="col">Monnaie</th>
-        <th scope="col">Argent gagner</th>
-        <th scope="col">Argent perdu</th>
-        <th scope="col">Position</th>
-        <th scope="col">Pierre de foyer</th>
-        <th scope="col">Nbre total de mort</th>
-        <th scope="col">#</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="text-center">
-        <td>{{personnageService.personnagesObject[index].name}}</td>
-        <td>{{personnageService.personnagesObject[index].money}}</td>
-        <td>{{personnageService.personnagesObject[index].goldGained}}</td>
-        <td>{{personnageService.personnagesObject[index].goldLost}}</td>
-        <td>Zone : {{personnageService.personnagesObject[index].zone}} - Region : {{personnageService.personnagesObject[index].region}}</td>
-        <td>{{personnageService.personnagesObject[index].pdf}}</td>
-        <td>{{personnageService.personnagesObject[index].nbreMort}}</td>
-        <th scope="row"> <a routerLink="/list-personnage">Revenir</a> </th>
-      </tr>
-      </tbody>
-      <thead>
-      <tr class="bg-secondary text-white text-center rounded">
-        <th scope="col">Ilvl</th>
-        <th scope="col">Spécialisation</th>
-        <th scope="col">Haut-faits</th>
-        <th scope="col" *ngIf="personnageService.personnagesObject[index].covenant">Congrégation</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="text-center">
-        <td>{{personnageService.personnagesObject[index].ilvl}}</td>
-        <td>{{personnageService.personnagesObject[index].specialisation}}</td>
-        <td>{{personnageService.personnagesObject[index].hf}}</td>
-        <td *ngIf="personnageService.personnagesObject[index].covenant">{{personnageService.personnagesObject[index].covenant}} | Renom : {{personnageService.personnagesObject[index].renom}}</td>
-      </tr>
-      </tbody>
-    </table>
+<div class="col-12 col-lg">
+  <div class="row">
+    <div class="col-12 col-lg">
+      <div class="font-weight-bold pb-1"> Personnage</div>
+       {{personnageService.personnagesObject[index].name}}
+    </div>
+    <div class="col-12 col-lg">
+      <div class="font-weight-bold pb-1"> Spécialisation</div>
+      {{personnageService.personnagesObject[index].specialisation}}
+    </div>
+    <div class="col-12 col-lg">
+      <div class="font-weight-bold pb-1"> Monnaie</div>
+      {{personnageService.personnagesObject[index].money}}
+    </div>
+    <div class="col-12 col-lg">
+      <div class="font-weight-bold pb-1"> Argent gagné</div>
+      {{personnageService.personnagesObject[index].goldGained}}
+    </div>
+    <div class="col-12 col-lg">
+      <div class="font-weight-bold pb-1"> Argent perdu</div>
+      {{personnageService.personnagesObject[index].goldLost}}
+    </div>
+    <div class="col-12 col-lg-2">
+      <div class="font-weight-bold pb-1"> Position</div>
+      Zone : {{personnageService.personnagesObject[index].zone}} <br> Region : {{personnageService.personnagesObject[index].region}}
+    </div>
+    <div class="col-12 col-lg-2">
+      <div class="font-weight-bold pb-1"> Pierre de foyer</div>
+      {{personnageService.personnagesObject[index].pdf}}
+    </div>
+    <div class="col-12 col-lg-2">
+      <div class="font-weight-bold pb-1"> Nbre total de mort</div>
+      {{personnageService.personnagesObject[index].nbreMort}}
+    </div>
+    <div class="col-12 col-lg-2">
+      <div class="font-weight-bold pb-1"> Ilvl</div>
+      {{personnageService.personnagesObject[index].ilvl}}
+    </div>
+    <div class="col-12 col-lg-2">
+      <div class="font-weight-bold pb-1"> Haut-faits</div>
+      {{personnageService.personnagesObject[index].hf}}
+    </div>
+    <div class="col-12 col-lg-2" *ngIf="personnageService.personnagesObject[index].covenant">
+      <div class="font-weight-bold pb-1"> Congrégation</div>
+      {{personnageService.personnagesObject[index].covenant}} <br> Renom : {{personnageService.personnagesObject[index].renom}}
+    </div>
+  </div>
+<!--    <table class="table">-->
+<!--      <thead>-->
+<!--      <tr class="bg-secondary text-white text-center rounded">-->
+<!--        <th scope="col">Personnage</th>-->
+<!--        <th scope="col">Monnaie</th>-->
+<!--        <th scope="col">Argent gagner</th>-->
+<!--        <th scope="col">Argent perdu</th>-->
+<!--        <th scope="col">Position</th>-->
+<!--        <th scope="col">Pierre de foyer</th>-->
+<!--        <th scope="col">Nbre total de mort</th>-->
+<!--        <th scope="col">#</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr class="text-center">-->
+<!--        <td>{{personnageService.personnagesObject[index].name}}</td>-->
+<!--        <td>{{personnageService.personnagesObject[index].money}}</td>-->
+<!--        <td>{{personnageService.personnagesObject[index].goldGained}}</td>-->
+<!--        <td>{{personnageService.personnagesObject[index].goldLost}}</td>-->
+<!--        <td>Zone : {{personnageService.personnagesObject[index].zone}} - Region : {{personnageService.personnagesObject[index].region}}</td>-->
+<!--        <td>{{personnageService.personnagesObject[index].pdf}}</td>-->
+<!--        <td>{{personnageService.personnagesObject[index].nbreMort}}</td>-->
+<!--        <th scope="row"> <a routerLink="/list-personnage">Revenir</a> </th>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--      <thead>-->
+<!--      <tr class="bg-secondary text-white text-center rounded">-->
+<!--        <th scope="col">Ilvl</th>-->
+<!--        <th scope="col">Spécialisation</th>-->
+<!--        <th scope="col">Haut-faits</th>-->
+<!--        <th scope="col" *ngIf="personnageService.personnagesObject[index].covenant">Congrégation</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr class="text-center">-->
+<!--        <td>{{personnageService.personnagesObject[index].ilvl}}</td>-->
+<!--        <td>{{personnageService.personnagesObject[index].specialisation}}</td>-->
+<!--        <td>{{personnageService.personnagesObject[index].hf}}</td>-->
+<!--        <td *ngIf="personnageService.personnagesObject[index].covenant">{{personnageService.personnagesObject[index].covenant}} | Renom : {{personnageService.personnagesObject[index].renom}}</td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
 </div>
 </div>
 

@@ -46,7 +46,11 @@ export class PersonnageService {
       },
       (error) => {
         console.log('Erreur get api ! : ' , error);
-      }
+      },
+        () => {
+        this.personnagesObject.sort((a, b) => b.lvl - a.lvl); // tri par lvl descendant
+        console.log('Appel api réussi');
+        }
     );
   }
 

@@ -32,62 +32,62 @@
 -->
 
 <div class="row h3 bg-secondary rounded text-white text-center pb-2">
-  <div class="col-1">
+  <div class="col">
     #
   </div>
-  <div class="col-2">
+  <div class="col">
     Personnage
   </div>
-  <div class="col-1">
+  <div class="col">
     Sexe
   </div>
-  <div class="col-1">
+  <div class="col">
     Lvl
   </div>
-  <div class="col-2">
+  <div class="col">
     Classe
   </div>
-  <div class="col-2">
+  <div class="col">
     Race
   </div>
-  <div class="col-1">
+  <div class="col">
     Serveur
   </div>
-  <div class="col-1">
+  <div class="col">
     Faction
   </div>
-  <div class="col-1">
+  <div class="col">
     #
   </div>
 </div>
 
 <div class="row h6 pb-2 text-center" *ngFor="let item of personnageService.personnagesObject; let index = index" [ngStyle]="{color:getFaction(item.faction)}">
-  <div class="col-1">
+  <div class="col">
     {{ index }}
   </div>
-  <div class="col-2">
+  <div class="col">
     {{item.name}}
   </div>
-  <div class="col-1">
+  <div class="col">
     {{item.gender}}
   </div>
-  <div class="col-1">
+  <div class="col">
     {{item.lvl}}
   </div>
-  <div class="col-2">
+  <div class="col">
     {{item.classe}}
   </div>
-  <div class="col-2">
+  <div class="col">
     {{item.race}}
   </div>
-  <div class="col-1">
+  <div class="col">
     {{item.realm}}
   </div>
-  <div class="col-1">
+  <div class="col">
     {{item.faction}}
   </div>
-  <div class="col-1">
-    <a [routerLink]="[index]" placement="top" ngbTooltip="{{item.name}}" >Détails</a>
+  <div class="col">
+    <a [routerLink]="[index]" placement="top" ngbTooltip="{{item.name}} / {{item.classe}}" >Détails</a>
   </div>
 </div>
 </div>

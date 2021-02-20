@@ -14,9 +14,9 @@ export class TokenService {
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private router: Router) {
     this.tokenAcquis = false;
-    //  this.accessToken = 'USe1QCN6Hrh3yG2O2esYh5Vi2EijqhCbw9';
-    this.clientId = '0b801149a6da473eb9a837f770310c80';
-    this.clientSecret = 'R8Pwnnjfwf1UmytXjJlevV9z06Jk3YUb';
+    //  this.accessToken = 'USKo71du47ju5ug4eGBaBUy46ekdZMLLFv';
+     this.clientId = '0b801149a6da473eb9a837f770310c80';
+     this.clientSecret = 'R8Pwnnjfwf1UmytXjJlevV9z06Jk3YUb';
   }
 
   getToken(): void{

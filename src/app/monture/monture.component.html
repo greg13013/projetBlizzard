@@ -1,13 +1,41 @@
 <div class="container">
 
-  <div class="row pb-5">
-    <div class="col-4" *ngFor="let item of montureService.montureObject; let index = index">
+  <div class="row">
+    <div class="col-6  pb-5" *ngFor="let item of montureService.montureObject; let index = index">
+
       <h4> {{ item.nomMonture }} </h4><!-- || objet : {{montureService.montureObject[index].nomMonture}} -->
-      <img class="img-fluid" style="width: 50%" [src] = item.lienImage>
+
+      <div class="row">
+
+      <span class="col-6">
+        <img class="img-fluid" [src] = item.lienImage>
+      </span>
+
+      <span class="col-12 col-lg-6">
+
+          <span class="font-weight-bold"> Source </span> : {{item.source}}<br>
+
+          <span class="font-weight-bold">Description </span> : {{item.description}}<br>
+
+          <span class="font-weight-bold" *ngIf="item.faction === 'Alliance' || item.faction === 'Horde' || item.faction === 'Alliance / Horde'">Faction </span>
+          <span class="font-weight-bold" *ngIf="item.faction !== 'Alliance' && item.faction !== 'Horde' && item.faction !== 'Alliance / Horde'">Classe </span>
+            : {{item.faction}}
+
+      </span>
+      </div>
     </div>
   </div>
 </div>
 
+
+
 <div class="row" *ngIf="montureService.tokenAcquisMonture == false">
   <h2>Token manquant</h2>
 </div>
+
+<!--&lt;!&ndash;TEST LOADER&ndash;&gt;-->
+<!--<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">-->
+<!--  <p style="color: white">Please Wait. </p>-->
+<!--</ngx-spinner>-->
+
+

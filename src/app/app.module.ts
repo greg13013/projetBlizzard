@@ -17,6 +17,8 @@ import { TftComponent } from './tft/tft.component';
 import {FormsModule} from '@angular/forms';
 import { TftDetailComponent } from './tft-detail/tft-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import {TftService} from './service/tft.service';
 
 const appRoute: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -30,6 +32,7 @@ const appRoute: Routes = [
   { path: '**', redirectTo: 'not-found' }
 ];
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,19 +43,21 @@ const appRoute: Routes = [
     SinglePersonnageComponent,
     MontureComponent,
     TftComponent,
-    TftDetailComponent
+    TftDetailComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoute),
-    NgbModule
+    NgbModule,
+    NgxSpinnerModule
   ],
   providers: [
     PersonnageService,
     TokenService,
-    MonturesService
+    MonturesService,
+    TftService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,24 +1,35 @@
-<p>tft works!</p>
+<div class="container">
 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <div class="form-group">
   <label for="nom">Nom Invocateur</label>
-  <input type="text" id="nom" class="form-control" name="nom" ngModel>
+  <input type="text" id="nom" class="form-control" name="nom" placeholder="Nom de l'invocateur" ngModel>
+  </div>
   <button class="btn btn-primary" type="submit">Envoyer</button>
 </form>
 
-<div class="container" *ngIf="tftService.tft">
+<div class="container text-center" *ngIf="tftService.tft">
   <h2>15 DERNIERS MATCH</h2>
-  {{tftService.tft.puuid}}
-  <div class="row" *ngFor="let item of tftService.tft.match; let index = index">
+<div class="row">
+  <div class="col-6" *ngFor="let item of tftService.tft.match; let index = index">
 
-    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-      <ngb-panel title="{{item.idMatch}}">
-        <ng-template ngbPanelContent>
-          <body>
-          <app-tft-detail [idMatch] = item.idMatch></app-tft-detail> <!-- envoie en input au component tft-detail -->
-          </body>
-        </ng-template>
-      </ngb-panel>
-    </ngb-accordion>
-    Match : <a [routerLink]="[item.idMatch]">{{index + 1 }} - {{item.date | date: 'yyyy-MM-dd h:mm:ss a'}}</a> <br>
+<!--    <ngb-accordion #acc="ngbAccordion" >-->
+<!--      <ngb-panel id="static-{{index}}">-->
+<!--        <ng-template ngbPanelTitle>-->
+<!--          <span>&#9733;{{item.date | date: 'yyyy-MM-dd hh:mm:ss a'}}&#9733;</span>-->
+<!--        </ng-template>-->
+<!--        <ng-template ngbPanelContent>-->
+<!--          <app-tft-detail [idMatch] = item.idMatch></app-tft-detail>  &lt;!&ndash;envoie en input au component tft-detail&ndash;&gt;-->
+<!--        </ng-template>-->
+<!--      </ngb-panel>-->
+<!--    </ngb-accordion>-->
+    <a [routerLink]="[item.idMatch]">
+      <button type="button" class="btn btn-secondary btn-lg mb-5">
+        {{index + 1 }} => {{item.date | date: 'dd-MM-yyyy HH:mm:ss'}}
+      </button>
+    </a>
+
+<!--    Match : <a [routerLink]="[item.idMatch]">{{index + 1 }} - {{item.date | date: 'yyyy-MM-dd hh:mm:ss a'}}</a> <br>-->
   </div>
+</div>
+</div>
 </div>

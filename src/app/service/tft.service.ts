@@ -12,7 +12,7 @@ export class TftService {
   fin: boolean; // fin requete
 
   constructor(private httpClient: HttpClient) {
-    this.apiKey = 'RGAPI-e373b27d-6aa2-42b0-9c58-6c24547032e4';
+    this.apiKey = 'RGAPI-9354f84d-c997-4d14-9760-2f7025d8cd53';
   }
 
   appelAPIByNom(nom: string){
@@ -90,6 +90,28 @@ export class TftService {
       );
   }
 
+  appelAPIcompanion(tft: TftsDetail){
+    this.httpClient.get<any>('http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/companions.json')
+      .subscribe(
+        (response) => {
+          for (let index in response){
+            // console.log('companion : ', tft.companionId);
+            if (response[index].contentId === tft.companionId) {
+              // console.log('lienimage companion : ' , response[index].loadoutsIcon);
+              // console.log('NUMERO lien image companion : ' , response[index].loadoutsIcon.substr(response[index].loadoutsIcon.indexOf('Tooltip')).toLowerCase());
+              tft.lienImageCompanion = 'http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/loadouts/companions/' + response[index].loadoutsIcon.substr(response[index].loadoutsIcon.indexOf('Tooltip')).toLowerCase();
+            }
+          }
+        },
+        (error) => {
+          console.log('erreur companion');
+    },
+        () => {
+          console.log('companion réussi');
+        }
+      );
+  }
+
   appelAPIDetailMatch(num: string, tft: Tfts){
     this.fin = false;
     this.tft.participant = [];
@@ -109,11 +131,13 @@ export class TftService {
                 trait: response.info.participants[index].traits.sort((a, b) => b.num_units - a.num_units), // tri par num_units
                 units: response.info.participants[index].units,
                 round: this.getRound(response.info.participants[index].last_round),
-                gold: response.info.participants[index].gold_left
+                gold: response.info.participants[index].gold_left,
+                companionId: response.info.participants[index].companion.content_ID
               })
             ;
             console.log('nbre : ', response.info.participants[index].puuid);
             this.appelAPIByPuuid(response.info.participants[index].puuid, tft.participant[index]);
+            this.appelAPIcompanion(tft.participant[index]);
           }
         },
         (error) => {
@@ -121,7 +145,33 @@ export class TftService {
 
         },
         () => {
+          // traitement tableau (tri, j'enleve caractere inutile etc..)
           tft.participant.sort((a, b) => a.placement - b.placement); // tri placement
+            for (let index in tft.participant) {
+              for (let indexTrait in tft.participant[index].trait) {
+                tft.participant[index].trait[indexTrait].name = tft.participant[index].trait[indexTrait].name.toLowerCase();
+                if (!tft.participant[index].trait[indexTrait].name.search('set4_')) {
+                  tft.participant[index].trait[indexTrait].name = tft.participant[index].trait[indexTrait].name.substring(5, 30);
+                }
+              }
+            }
+            /*
+            for (let indexUnit in tft.participant[index].units){
+              if (!tft.participant[index].units[indexUnit].character_id.search('TFT4_')) {
+                console.log('tableau participant' +  tft.participant[index].units[indexUnit].character_id.indexOf('TFT4_'));
+                tft.participant[index].units[indexUnit].character_id = tft.participant[index].units[indexUnit].character_id.substring(5, 30);
+              }
+              if (!tft.participant[index].units[indexUnit].character_id.search('TFT4b_')) {
+                tft.participant[index].units[indexUnit].character_id = tft.participant[index].units[indexUnit].character_id.substring(6, 30);
+              }
+              if (tft.participant[index].units[indexUnit].chosen) {
+                if (!tft.participant[index].units[indexUnit].chosen.search('Set4_')) {
+                  tft.participant[index].units[indexUnit].chosen = tft.participant[index].units[indexUnit].chosen.substring(5, 30);
+                }
+                tft.participant[index].units[indexUnit].chosen = 'Elu : ' + tft.participant[index].units[indexUnit].chosen;
+              }
+            }
+          }*/
         }
       );
   }

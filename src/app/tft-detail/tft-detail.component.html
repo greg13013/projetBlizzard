@@ -1,22 +1,86 @@
-<div class="row"></div>
 
-<div class="container" *ngIf="tftService.fin">
-  <h2>{{tftService.tft.date | date: 'yyyy-MM-dd h:mm:ss a'}}</h2>
-  <div class="row" *ngFor="let item of tftService.tft.participant; let index = index">
-     PUUID : {{item.puuid}} <br>
-    NOM : {{item.nom}} <br>
-    PLACEMENT : {{item.placement}}<br>
-    TEMP : {{item.tempEliminer.substring(0,item.tempEliminer.indexOf("."))}}<br> <!-- j'enleve tout ce qu'il y a apres le point dans le temp -->
-    DERNIER ROUND : {{item.round}}<br>
-    OR RESTANT : {{item.gold}}<br>
-    KILL : {{item.kill}}<br>
-    <div class="col-6" *ngFor="let trait of item.trait; let index = index">
-      {{trait.name}} : {{trait.num_units}}<br>
+<div id="entete" *ngIf="tftService.fin">
+  <h2>{{tftService.tft.date | date: 'dd-MM-yyyy HH:mm:ss'}}</h2>
+<!--  <div class="row h5">-->
+<!--    <div class="col-1">-->
+<!--      RANG-->
+<!--    </div>-->
+<!--    <div class="col-2">-->
+<!--      NOM-->
+<!--    </div>-->
+<!--    <div class="col-1">-->
+<!--      TEMP-->
+<!--    </div>-->
+<!--    <div class="col-1">-->
+<!--      ROUND-->
+<!--    </div>-->
+<!--    <div class="col-2">-->
+<!--      TRAITS-->
+<!--    </div>-->
+<!--    <div class="col-2">-->
+<!--      UNITES-->
+<!--    </div>-->
+<!--    <div class="col-1">-->
+<!--      OR RESTANT-->
+<!--    </div>-->
+<!--    <div class="col-1">-->
+<!--      KILL-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <div class="row pb-5" *ngFor="let item of tftService.tft.participant; let index = index">
+    <div class="col">
+      <div class="h5"> RANG</div>
+      TOP : {{item.placement}}
     </div>
-    <div class="col-6 offset-3" *ngFor="let unit of item.units; let index = index" [ngStyle]="{color: getRareter(unit.rarity)}">
-      {{unit.character_id}} ({{getRareter(unit.rarity)}}, TIERS {{unit.tier}}) {{unit.chosen}}<br>
+    <div class="col">
+      <div class="h5">NOM</div>
+      <img class="rounded" style="width: 50%" src="{{item.lienImageCompanion}}"><br>
+      <span *ngIf="tftService.tft.puuid === item.puuid" [ngClass]="'h5'">{{item.nom}} </span>
+      <span *ngIf="tftService.tft.puuid !== item.puuid">{{item.nom}} </span>
+    </div>
+    <div class="col">
+      <div class="h5">TEMP</div>
+     {{item.tempEliminer.substring(0,item.tempEliminer.indexOf("."))}} <!-- j'enleve tout ce qu'il y a apres le point dans le temp -->
+    </div>
+    <div class="col">
+      <div class="h5">ROUND</div>
+      {{item.round}}
     </div>
 
-    <br><br>
+    <div class="col">
+      <div class="h5">GOLD</div>
+      {{item.gold}}
+    </div>
+    <div class="col">
+      <div class="h5">KILL EFFECTUER</div>
+      {{item.kill}}
+    </div>
+
+    <div class="col-12 col-lg-3">
+      <div class="h5">TRAITS</div>
+      <span class="" *ngFor="let trait of item.trait; let index = index">
+        <img class="mr-2" ngbTooltip="{{trait.name.charAt(0).toUpperCase() + trait.name.substr(1, trait.name.length)}} ({{trait.num_units}})"  src="assets/tft/traits/{{trait.name}}.png">
+<!--        {{trait.name}} : {{trait.num_units}}-->
+      </span>
+    </div>
+
+    <div class="col-12 col-lg-3">
+      <div class="h5">UNITES</div>
+      <div class="row">
+            <span class="pb-2 col-12 col-lg-3" *ngFor="let unit of item.units; let index = index" [ngStyle]="{color: getRareter(unit.rarity)}" >
+              <img class="rounded"  ngbTooltip="{{getNameChampions(unit.character_id)}}" src="assets/tft/champions/{{unit.character_id}}.png">
+              <br *ngIf="unit.tier === 1">
+              <span *ngFor="let i of [].constructor(unit.tier)">&#9733;</span><br>   <!--Ajout étoile selon le niveau du personnage-->
+              <div class="row">
+                <span class="col-4 col-lg-12" *ngFor="let item of unit.items; let index = index">
+                  <img style="width: 40%; border-radius: 1em" src="assets/tft/items/{{getImageItem(item)}}.png" ngbTooltip="{{getNomItem(item)}}">
+                </span>
+              </div>
+              <span *ngIf="unit.chosen && unit.items">Elu : {{unit.chosen}}</span>
+            </span>
+      </div>
+    </div>
+
   </div>
 </div>

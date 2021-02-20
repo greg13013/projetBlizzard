@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import {TokenService} from './token.service';
 import {HttpClient} from '@angular/common/http';
 import {Montures} from '../../models/montures';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MonturesService {
-  
+
   montureObject: Array<Montures> = [];
   tokenAcquisMonture: boolean;
 
-  constructor(private tokenService: TokenService, private httpClient: HttpClient) { }
+  constructor(private tokenService: TokenService, private httpClient: HttpClient, private spinnerService: NgxSpinnerService) { }
 
   gettokenService(): TokenService {
     return this.tokenService;
@@ -23,6 +24,7 @@ export class MonturesService {
 
   // appel api monture pour récupérer les monture et l'id
   appelAPIMonture(): void {
+    // this.spinnerService.show(); // test loader
     this.montureObject = []; // vide l'objet a chaque appel
     this.httpClient
       .get<any>('https://eu.api.blizzard.com/profile/user/wow/collections/mounts?namespace=profile-eu&locale=fr_FR&access_token=' + this.tokenService.accessToken)
@@ -32,7 +34,12 @@ export class MonturesService {
           console.log('résultat get monture : ' , response);
           for (let index in response.mounts){
             // this.montureObject = new Montures(this.monture[0].all.mounts[index].mount.id, 0 , this.monture[0].all.mounts[index].mount.name );
-            this.montureObject.push({id : response.mounts[index].mount.id, nomMonture : response.mounts[index].mount.name });
+            this.montureObject.push(
+              {
+                id : response.mounts[index].mount.id,
+                nomMonture : response.mounts[index].mount.name
+              }
+              );
             // this.montureObject.nomMonture =  this.monture[0].all.mounts[index].mount.name;
             console.log('api monture', response.mounts[index].mount.id);
             this.appelAPIidMonture(this.montureObject[index]);
@@ -56,6 +63,21 @@ export class MonturesService {
         (response) => {
           console.log('id Monture : ' + monture.id);
           console.log('resultat appel api image monture : ', response);
+          monture.description = response.description;
+          if (response.requirements){
+            if (response.requirements.faction){
+              monture.faction = response.requirements.faction.name;
+            }
+            if (response.requirements.classes){
+              monture.faction = response.requirements.classes[0].name;
+            }
+          }
+          else {
+            monture.faction = 'Alliance / Horde';
+          }
+          if (response.source){
+          monture.source = response.source.name;
+          }
           this.appelAPIlienMonture(response.creature_displays[0].key.href, monture);
         },
         (error) => {
@@ -82,6 +104,7 @@ appelAPIlienMonture(urlImage: string, monture: Montures): void {
           console.log('Erreur LIEN image appel api monture : ', error);
         },
         () => {
+            // this.spinnerService.hide(); // test loader
           console.log('appel LIEN image api monture complete');
         }
       );

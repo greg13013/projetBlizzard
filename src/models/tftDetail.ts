@@ -4,10 +4,12 @@ export class TftsDetail {
               public nom?: string,
               public placement?: number,
               public kill?: number,
-              public trait?: [],
-              public units?: [],
+              public trait?: any[],
+              public units?: any[],
               public tempEliminer?: string,
               public round?: string,
-              public gold?: number
+              public gold?: number,
+              public companionId?: number,
+              public lienImageCompanion?: string
   ) {  }
 }
