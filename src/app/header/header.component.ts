@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
   constructor(public tokenService: TokenService) { }
 
   ngOnInit(): void {
-    this.urlAuthorize = 'https://eu.battle.net/oauth/authorize?response_type=code&client_id=' + this.tokenService.clientId + '&scope=wow.profile%20sc2.profile&redirect_uri=http://localhost:4200/accueil';
+    console.log(window.location.origin);
+    this.urlAuthorize = 'https://eu.battle.net/oauth/authorize?response_type=code&client_id=' + this.tokenService.clientId + '&scope=wow.profile%20sc2.profile&redirect_uri=' + window.location.origin + '/accueil';
   }
 
 }

@@ -41,9 +41,9 @@ export class TokenService {
       Headers = Headers.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
       Headers = Headers.append('Authorization', 'Basic ' + btoa(basicAuth));
       console.log('token service, url : ' + this.url);
-      console.log('https://us.battle.net/oauth/token?redirect_uri=http://localhost:4200/accueil&scope=wow.profile&grant_type=authorization_code&code=' + this.url);
+      console.log('https://us.battle.net/oauth/token?redirect_uri=' + window.location.origin + '/accueil&scope=wow.profile&grant_type=authorization_code&code=' + this.url);
       this.httpClient
-        .post<any>('https://us.battle.net/oauth/token?redirect_uri=http://localhost:4200/accueil&scope=wow.profile&grant_type=authorization_code&code=' + this.url, null, { headers: Headers })
+        .post<any>('https://us.battle.net/oauth/token?redirect_uri=' + window.location.origin + '/accueil&scope=wow.profile&grant_type=authorization_code&code=' + this.url, null, { headers: Headers })
         .subscribe(
           (response) => {
             console.log('requete post token service: ' , response); //afficher objet dans console log(string, objet)
