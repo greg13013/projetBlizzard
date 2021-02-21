@@ -2,9 +2,9 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
   <div class="form-group">
   <label for="nom">Nom Invocateur</label>
-  <input type="text" id="nom" class="form-control" name="nom" placeholder="Nom de l'invocateur" ngModel>
+  <input type="text" id="nom" class="form-control" name="nom" placeholder="Nom de l'invocateur" required ngModel>
   </div>
-  <button class="btn btn-primary" type="submit">Envoyer</button>
+  <button class="btn btn-primary" id="envoyer" type="submit" [disabled]=f.invalid (click)="Desactiver()">Envoyer</button>
 </form>
 
 <div class="container text-center" *ngIf="tftService.tft">

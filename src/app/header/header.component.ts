@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(window.location.origin);
-    this.urlAuthorize = 'https://eu.battle.net/oauth/authorize?response_type=code&client_id=' + this.tokenService.clientId + '&scope=wow.profile%20sc2.profile&redirect_uri=' + window.location.origin + '/accueil';
+    this.urlAuthorize = 'https://eu.battle.net/oauth/authorize?response_type=code&client_id=' + this.tokenService.clientId + '&scope=wow.profile%20sc2.profile&redirect_uri=' + window.location.origin;
   }
 
 }

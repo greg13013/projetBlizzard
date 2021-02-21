@@ -19,8 +19,9 @@ export class TftService {
     this.fin = false;
     this.tft = new Tfts();
     let Headers = new HttpHeaders();
-    Headers = Headers.append('Access-Control-Allow-Origin', '*');
     Headers = Headers.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    Headers = Headers.append('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+    Headers = Headers.append('Access-Control-Allow-Origin', '*');
     this.httpClient
       .get<any>('https://euw1.api.riotgames.com/tft/summoner/v1/summoners/by-name/' + nom + '?api_key=' + this.apiKey, {headers: Headers})
       .subscribe(
